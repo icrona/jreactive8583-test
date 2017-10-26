@@ -41,7 +41,7 @@ public class ClientServerIT extends AbstractIT {
         TestUtil.waitFor("client connected", client::isConnected);
 
         final IsoMessage isoMessage = client.getIsoMessageFactory().newMessage(0x0200);
-        isoMessage.setField(2, IsoType.LLVAR.value("asdfasdfasdfasdf", 16));
+        isoMessage.setField(2, IsoType.LLVAR.value("1234567890123456", 16));
         isoMessage.setField(3, IsoType.NUMERIC.value("123456", 6));
         isoMessage.setField(4, IsoType.AMOUNT.value("2500000", 12));
         isoMessage.setField(7, IsoType.DATE10.value("1025050413"));
@@ -50,13 +50,14 @@ public class ClientServerIT extends AbstractIT {
         isoMessage.setField(13, IsoType.DATE4.value("1025"));
         isoMessage.setField(15, IsoType.DATE4.value("1025"));
         isoMessage.setField(18, IsoType.NUMERIC.value("1234", 4));
-        isoMessage.setField(32, IsoType.LLVAR.value("aaaa",4));
-        isoMessage.setField(37, IsoType.NUMERIC.value("123456789012",12));
+        isoMessage.setField(32, IsoType.LLVAR.value("1234",4));
+        isoMessage.setField(37, IsoType.ALPHA.value("123456aaaaaa",12));
         isoMessage.setField(41, IsoType.ALPHA.value("a1a1a1a1a1a1a1a1",16));
-        isoMessage.setField(47, IsoType.LLLVAR.value("yXRsKiLNaqrGekQCbpRYfSdCjPNhteKfARklTbGeNolkXVkqrfuVRYCRObPuZNYJEVosukDQnBpzAxGXahWzdNlPjyuHocvnsKSobkfvGYlvyCwxgIvxWaVNBBcWLzSxVnlNQZYgpLFCVmajDBfTgZNsmETbVlTFFrFilOzMltQZwXjByMwTLKqwbPRCxcUaFtXpZhOiSLsIftAjti",210));
-        isoMessage.setField(48, IsoType.LLLVAR.value("yXRsKiLNaqrGekQCbpRYfSdCjPNhteKfARklTbGeNolkXVkqrfuVRYCRObPuZNYJEVosukDQnBpzAxGXahWzdNlPjyuHocvnsKSobkfvGYlvyCwxgIvxWaVNBBcWLzSxVnlNQZYgpLFCVmajDBfTgZNsmETbVlTFFrFilOzMltQZwXjByMwTLKqwbPRCxcUaFtXpZhOiSLsIftAjti",210));
+        isoMessage.setField(47, IsoType.LLLVAR.value("123456789012345678",18));
+        isoMessage.setField(48, IsoType.LLLVAR.value("1234567890123456789012345",25));
         isoMessage.setField(49, IsoType.NUMERIC.value("840",3));
-        isoMessage.setField(63, IsoType.LLLVAR.value("aaaaaa",6));
+        isoMessage.setField(63, IsoType.LLLVAR.value("123456",6));
+
 
         System.out.println(isoMessage.debugString());
         client.send(isoMessage);
